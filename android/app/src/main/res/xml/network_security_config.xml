@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Network Security Config for Android -->
+<!-- Allows HTTPS traffic to m4group.in and payment gateways -->
+<network-security-config>
+    <domain-config cleartextTrafficPermitted="false">
+        <!-- M4 Group main domain -->
+        <domain includeSubdomains="true">m4group.in</domain>
+        <!-- Payment gateways -->
+        <domain includeSubdomains="true">razorpay.com</domain>
+        <domain includeSubdomains="true">payu.in</domain>
+        <domain includeSubdomains="true">ccavenue.com</domain>
+        <domain includeSubdomains="true">paytm.com</domain>
+        <domain includeSubdomains="true">phonepe.com</domain>
+        <domain includeSubdomains="true">stripe.com</domain>
+        <trust-anchors>
+            <certificates src="system" />
+        </trust-anchors>
+    </domain-config>
+</network-security-config>
