@@ -1,5 +1,5 @@
 name: m4_user
-description: "M4 Group - Production Flutter WebView Application"
+description: "M4 Group - Premium Native Flutter Application"
 publish_to: 'none'
 
 version: 1.0.0+1
@@ -12,36 +12,49 @@ dependencies:
     sdk: flutter
 
   # State Management
-  get: ^4.6.6
+  flutter_riverpod: ^2.5.1
+  riverpod_annotation: ^2.3.5
 
-  # WebView
-  webview_flutter: ^4.10.0
+  # Navigation
+  go_router: ^14.2.0
 
-  # API
+  # API & Networking
   dio: ^5.7.0
-
-  # Connectivity
   connectivity_plus: ^6.1.1
 
-  # URL Launcher (for external links)
-  url_launcher: ^6.3.1
-
-  # Shared Preferences (for theme persistence)
-  shared_preferences: ^2.3.3
-
-  # Icons
-  cupertino_icons: ^1.0.8
-
-  # Logging
-  logger: ^2.5.0
-
-  # Google Fonts (Inter font family)
+  # UI & Animations
   google_fonts: ^6.2.1
+  flutter_svg: ^2.0.10+1
+  font_awesome_flutter: ^10.7.0
+  carousel_slider: ^5.0.0
+  shimmer: ^3.0.0
+  cached_network_image: ^3.3.1
+  animate_do: ^3.3.4
+  flutter_staggered_animations: ^1.0.0
+  lottie: ^3.1.2
+  glassmorphism: ^3.0.0
+  
+  # Maps & Location
+  google_maps_flutter: ^2.7.0
+
+  # Utilities
+  url_launcher: ^6.3.1
+  shared_preferences: ^2.3.3
+  logger: ^2.5.0
+  intl: ^0.19.0
+
+  cupertino_icons: ^1.0.8
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^4.0.0
+  build_runner: ^2.4.11
+  riverpod_generator: ^2.4.0
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/images/
+    - assets/lottie/
+    - assets/dummy_data/

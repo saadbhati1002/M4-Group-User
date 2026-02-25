@@ -1,0 +1,53 @@
+{
+  "projects": [
+    {
+      "id": "1",
+      "name": "M4 Aura Heights",
+      "location": "Grant Road, Mumbai",
+      "status": "Ongoing",
+      "description": "Experience luxury living at the heart of South Mumbai. M4 Aura Heights offers premium 2 & 3 BHK residences with world-class amenities.",
+      "image": "https://m4group.in/images/aura-heights.jpg",
+      "amenities": ["Fitness Center", "Landscaped Garden", "Automated Parking", "High Speed Elevators"],
+      "rera": "P51900000000"
+    },
+    {
+      "id": "2",
+      "name": "Eu4ria Villas",
+      "location": "Lonavala",
+      "status": "Completed",
+      "description": "Escape to tranquility. Exclusive luxury villas in the scenic hills of Lonavala, designed for the ultimate getaway.",
+      "image": "https://m4group.in/images/eu4ria-villas.jpg",
+      "amenities": ["Private Pool", "24x7 Security", "Gated Community", "Luxury Interiors"],
+      "rera": "P52100000000"
+    }
+  ],
+  "services": [
+    {
+      "id": "1",
+      "title": "Residential Development",
+      "description": "Crafting premium living spaces that redefine luxury and comfort in prime urban locations.",
+      "icon": "home"
+    },
+    {
+      "id": "2",
+      "title": "Commercial Projects",
+      "description": "Developing state-of-the-art commercial hubs designed for modern businesses.",
+      "icon": "business"
+    },
+    {
+      "id": "3",
+      "title": "Construction Management",
+      "description": "Our sister concern, Fern Constructions, ensures excellence in execution and quality.",
+      "icon": "build"
+    }
+  ],
+  "blogs": [
+    {
+      "id": "1",
+      "title": "Real Estate Trends 2026",
+      "date": "Oct 15, 2025",
+      "summary": "Exploring the shift towards sustainable luxury in Mumbai's real estate market.",
+      "image": "https://m4group.in/images/blog1.jpg"
+    }
+  ]
+}
