@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:animate_do/animate_do.dart';
 import '../../../../core/theme/app_theme.dart';
+import '../../../../widgets/luxury_widgets.dart';
+import '../../../../widgets/luxury_drawer.dart';
 
 class BlogScreen extends StatelessWidget {
   const BlogScreen({super.key});
@@ -8,76 +10,79 @@ class BlogScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('BLOGS & NEWS'),
-        backgroundColor: AppTheme.charcoal,
-        foregroundColor: AppTheme.primaryGold,
-      ),
-      body: RefreshIndicator(
-        onRefresh: () async => await Future.delayed(const Duration(seconds: 1)),
-        child: ListView.builder(
-          padding: const EdgeInsets.all(20),
-          itemCount: 5,
-          itemBuilder: (context, index) {
-            return FadeInUp(
+      drawer: const LuxuryDrawer(),
+      appBar: AppBar(title: const Text('INSIGHTS & NEWS')),
+      body: ListView.builder(
+        padding: const EdgeInsets.all(20),
+        itemCount: 3,
+        itemBuilder: (context, index) {
+          return Padding(
+            padding: const EdgeInsets.only(bottom: 25),
+            child: FadeInUp(
               delay: Duration(milliseconds: index * 100),
-              child: _buildBlogCard(context),
-            );
-          },
-        ),
-      ),
-    );
-  }
-
-  Widget _buildBlogCard(BuildContext context) {
-    return Card(
-      margin: const EdgeInsets.only(bottom: 20),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-      elevation: 2,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            height: 180,
-            decoration: const BoxDecoration(
-              color: Colors.grey,
-              borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(15), topRight: Radius.circular(15)),
+              child: LuxuryContainer(
+                padding: EdgeInsets.zero,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    ClipRRect(
+                      borderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(22),
+                          topRight: Radius.circular(22)),
+                      child: Image.network(
+                        'https://images.unsplash.com/photo-1448630360428-65ff65dfcf3d?q=80&w=2073',
+                        height: 180,
+                        width: double.infinity,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(20),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            'The Future of Luxury Living in Mumbai',
+                            style: TextStyle(
+                                color: AppTheme.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18),
+                          ),
+                          const SizedBox(height: 10),
+                          const Text(
+                            'Explore how modern architecture is redefining the skyline and lifestyle of Indias luxury capital...',
+                            style: TextStyle(
+                                color: AppTheme.softGrey,
+                                fontSize: 14,
+                                height: 1.5),
+                          ),
+                          const SizedBox(height: 15),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const Text('OCT 24, 2026',
+                                  style: TextStyle(
+                                      color: AppTheme.primaryGold,
+                                      fontSize: 10,
+                                      fontWeight: FontWeight.bold)),
+                              TextButton(
+                                onPressed: () {},
+                                child: const Text('READ ARTICLE',
+                                    style: TextStyle(
+                                        color: AppTheme.primaryGold,
+                                        fontSize: 12)),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ),
-            child: const Center(
-                child: Icon(Icons.article, size: 50, color: Colors.white54)),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(15),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  'Oct 15, 2025',
-                  style: TextStyle(
-                      color: AppTheme.primaryGold,
-                      fontSize: 12,
-                      fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(height: 5),
-                const Text(
-                  'Crafting Timeless Residences: The M4 Group Philosophy',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(height: 10),
-                const Text(
-                  'Exploration of how luxury and sustainability can coexist in modern urban development...',
-                  style: TextStyle(color: Colors.grey),
-                ),
-                TextButton(
-                  onPressed: () {},
-                  child: const Text('READ MORE',
-                      style: TextStyle(color: AppTheme.primaryGold)),
-                ),
-              ],
-            ),
-          ),
-        ],
+          );
+        },
       ),
     );
   }

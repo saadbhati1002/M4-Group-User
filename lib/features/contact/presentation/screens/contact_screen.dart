@@ -1,32 +1,58 @@
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:animate_do/animate_do.dart';
 import '../../../../core/theme/app_theme.dart';
-import '../../../../widgets/glass_card.dart';
+import '../../../../widgets/luxury_widgets.dart';
+import '../../../../widgets/luxury_drawer.dart';
 
-class ContactUsScreen extends StatelessWidget {
-  const ContactUsScreen({super.key});
-
-  static const _officeLocation =
-      LatLng(18.9616, 72.8228); // Placeholder for Grant Road, Mumbai
+class ContactScreen extends StatelessWidget {
+  const ContactScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('CONTACT US'),
-        backgroundColor: AppTheme.charcoal,
-        foregroundColor: AppTheme.primaryGold,
-      ),
+      drawer: const LuxuryDrawer(),
+      appBar: AppBar(title: const Text('CONTACT CONCIERGE')),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(20),
         child: Column(
           children: [
-            _buildMapSection(),
+            FadeInUp(
+              child: const LuxuryContainer(
+                padding: EdgeInsets.all(25),
+                child: Column(
+                  children: [
+                    Icon(Icons.location_on_rounded,
+                        color: AppTheme.primaryGold, size: 40),
+                    SizedBox(height: 15),
+                    Text(
+                      'CORPORATE OFFICE',
+                      style: TextStyle(
+                          color: AppTheme.white, fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(height: 10),
+                    Text(
+                      'M4 Group, Nariman Point,\nMumbai, Maharashtra 400021',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(color: AppTheme.softGrey),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(height: 25),
+            Row(
+              children: [
+                Expanded(
+                    child: _buildContactBox(
+                        Icons.call, 'CALL', '+91 22 1234 5678')),
+                const SizedBox(width: 15),
+                Expanded(
+                    child: _buildContactBox(
+                        Icons.email, 'EMAIL', 'info@m4group.in')),
+              ],
+            ),
             const SizedBox(height: 30),
-            _buildContactInfo(context),
-            const SizedBox(height: 30),
-            _buildActionButtons(context),
+            _buildInquirySection(context),
             const SizedBox(height: 50),
           ],
         ),
@@ -34,96 +60,58 @@ class ContactUsScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildMapSection() {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(20),
-      child: Container(
-        height: 250,
-        color: Colors.grey[300],
-        child: GoogleMap(
-          initialCameraPosition:
-              const CameraPosition(target: _officeLocation, zoom: 15),
-          markers: {
-            const Marker(
-                markerId: MarkerId('office'), position: _officeLocation),
-          },
-        ),
-      ),
-    );
-  }
-
-  Widget _buildContactInfo(BuildContext context) {
-    return GlassCard(
+  Widget _buildContactBox(IconData icon, String label, String value) {
+    return LuxuryContainer(
+      padding: const EdgeInsets.all(20),
       child: Column(
         children: [
-          const Text(
-            'GET IN TOUCH',
-            style: TextStyle(
-                color: AppTheme.primaryGold,
-                fontWeight: FontWeight.bold,
-                fontSize: 20),
-          ),
-          const SizedBox(height: 20),
-          _buildInfoRow(Icons.location_on, 'Grant Road, Mumbai, Maharashtra'),
-          const Divider(height: 30),
-          _buildInfoRow(Icons.email, 'sales@m4group.in'),
-          const Divider(height: 30),
-          _buildInfoRow(Icons.phone, '+91 12345 67890'),
+          Icon(icon, color: AppTheme.primaryGold, size: 24),
+          const SizedBox(height: 12),
+          Text(label,
+              style: const TextStyle(
+                  color: AppTheme.primaryGold,
+                  fontSize: 10,
+                  fontWeight: FontWeight.bold)),
+          const SizedBox(height: 5),
+          Text(value,
+              style: const TextStyle(color: AppTheme.white, fontSize: 11),
+              textAlign: TextAlign.center),
         ],
       ),
     );
   }
 
-  Widget _buildInfoRow(IconData icon, String text) {
-    return Row(
-      children: [
-        Icon(icon, color: AppTheme.primaryGold),
-        const SizedBox(width: 15),
-        Expanded(child: Text(text, style: const TextStyle(fontSize: 16))),
-      ],
-    );
-  }
-
-  Widget _buildActionButtons(BuildContext context) {
-    return Row(
-      children: [
-        Expanded(
-          child: _buildActionBtn(
-            'CALL NOW',
-            Icons.phone,
-            () => _launchUrl('tel:+911234567890'),
-          ),
+  Widget _buildInquirySection(BuildContext context) {
+    return FadeInUp(
+      child: LuxuryContainer(
+        padding: const EdgeInsets.all(25),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              'SEND AN INQUIRY',
+              style: TextStyle(
+                  color: AppTheme.white,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 1.5),
+            ),
+            const SizedBox(height: 20),
+            const LuxuryTextField(
+                hint: 'Full Name', icon: Icons.person_outline),
+            const SizedBox(height: 15),
+            const LuxuryTextField(
+                hint: 'Email Address', icon: Icons.email_outlined),
+            const SizedBox(height: 15),
+            const LuxuryTextField(
+                hint: 'Mobile Number', icon: Icons.phone_android_outlined),
+            const SizedBox(height: 25),
+            GoldButton(
+              label: 'Submit Request',
+              onPressed: () {},
+            ),
+          ],
         ),
-        const SizedBox(width: 15),
-        Expanded(
-          child: _buildActionBtn(
-            'EMAIL US',
-            Icons.email,
-            () => _launchUrl('mailto:sales@m4group.in'),
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildActionBtn(String label, IconData icon, VoidCallback onTap) {
-    return ElevatedButton.icon(
-      onPressed: onTap,
-      icon: Icon(icon, size: 20),
-      label: Text(label),
-      style: ElevatedButton.styleFrom(
-        backgroundColor: AppTheme.charcoal,
-        foregroundColor: AppTheme.primaryGold,
-        padding: const EdgeInsets.symmetric(vertical: 15),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       ),
     );
-  }
-
-  Future<void> _launchUrl(String url) async {
-    final Uri uri = Uri.parse(url);
-    if (!await launchUrl(uri)) {
-      throw 'Could not launch $url';
-    }
   }
 }

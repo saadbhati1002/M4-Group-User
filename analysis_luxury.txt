@@ -1,0 +1,18 @@
+﻿Analyzing M4-Group-User...                                      
+
+  error - The name 'AboutUsScreen' isn't a class - lib\core\routes\app_router.dart:34:42 - creation_with_non_type
+  error - The name 'ContactUsScreen' isn't a class - lib\core\routes\app_router.dart:57:42 - creation_with_non_type
+  error - The getter 'charcoal' isn't defined for the type 'AppTheme' - lib\features\career\presentation\screens\career_screen.dart:13:35 - undefined_getter
+  error - The getter 'charcoal' isn't defined for the type 'AppTheme' - lib\features\career\presentation\screens\career_screen.dart:52:51 - undefined_getter
+   info - Use 'const' with the constructor to improve performance - lib\features\contact\presentation\screens\contact_screen.dart:18:22 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\features\contact\presentation\screens\contact_screen.dart:20:24 - prefer_const_constructors
+   info - Use 'const' literals as arguments to constructors of '@immutable' classes - lib\features\contact\presentation\screens\contact_screen.dart:21:29 - prefer_const_literals_to_create_immutables
+  error - The getter 'charcoal' isn't defined for the type 'AppTheme' - lib\features\contact\presentation\screens\inquiry_form_screen.dart:19:35 - undefined_getter
+   info - Use 'const' with the constructor to improve performance - lib\features\services\presentation\screens\services_screen.dart:59:23 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\features\services\presentation\screens\services_screen.dart:76:26 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\features\services\presentation\screens\services_screen.dart:77:20 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\features\services\presentation\screens\services_screen.dart:78:24 - prefer_const_constructors
+   info - Statements in an if should be enclosed in a block - lib\features\splash\presentation\screens\splash_screen.dart:20:9 - curly_braces_in_flow_control_structures
+  error - Undefined name 'AppRouter' - lib\main.dart:26:21 - undefined_identifier
+  error - Undefined name 'InputError' - lib\widgets\luxury_widgets.dart:111:19 - undefined_identifier
+

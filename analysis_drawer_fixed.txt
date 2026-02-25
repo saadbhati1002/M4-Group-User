@@ -1,0 +1,8 @@
+﻿Analyzing M4-Group-User...                                      
+
+  error - Expected a method, getter, setter or operator declaration - lib\features\home\presentation\screens\home_screen.dart:238:3 - expected_executable
+  error - Expected a method, getter, setter or operator declaration - lib\features\home\presentation\screens\home_screen.dart:239:1 - expected_executable
+   info - Use 'const' with the constructor to improve performance - lib\features\services\presentation\screens\services_screen.dart:78:26 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\features\services\presentation\screens\services_screen.dart:79:20 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\features\services\presentation\screens\services_screen.dart:80:24 - prefer_const_constructors
+

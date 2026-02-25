@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:go_router/go_router.dart';
-import '../../../../core/constants/app_constants.dart';
 import '../../../../core/theme/app_theme.dart';
+import '../../../../core/constants/app_constants.dart';
+import '../../../../widgets/luxury_widgets.dart';
 import '../../../../widgets/parallax_hero_slider.dart';
-import '../../../../widgets/glass_card.dart';
+import '../../../../widgets/floating_contact_button.dart';
+
+import '../../../../widgets/luxury_drawer.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -12,7 +15,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: const AppDrawer(),
+      drawer: const LuxuryDrawer(),
       body: CustomScrollView(
         slivers: [
           _buildAppBar(context),
@@ -27,34 +30,20 @@ class HomeScreen extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 30),
-                FadeInUp(
-                  duration: const Duration(milliseconds: 800),
-                  child: _buildAboutSection(context),
-                ),
+                _buildAboutSection(context),
                 const SizedBox(height: 40),
-                _buildSectionHeader(context, 'BUSINESS HIGHLIGHTS'),
-                FadeInLeft(
-                  child: _buildHighlightsGrid(context),
-                ),
+                _buildSectionTitle(context, 'Business Verticals'),
+                _buildBusinessVerticals(context),
                 const SizedBox(height: 40),
-                _buildSectionHeader(context, 'CURRENT VENTURES'),
-                FadeInRight(
-                  child: _buildVenturesList(context),
-                ),
+                _buildSectionTitle(context, 'Featured Ventures'),
+                _buildVenturesList(context),
                 const SizedBox(height: 50),
               ],
             ),
           ),
         ],
       ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () => context.push(AppConstants.contact),
-        backgroundColor: AppTheme.primaryGold,
-        foregroundColor: Colors.black,
-        icon: const Icon(Icons.support_agent),
-        label: const Text('QUICK CONNECT'),
-      ),
-      bottomNavigationBar: _buildBottomNav(context),
+      floatingActionButton: const FloatingContactButton(),
     );
   }
 
@@ -63,47 +52,42 @@ class HomeScreen extends StatelessWidget {
       floating: true,
       pinned: true,
       expandedHeight: 80,
-      backgroundColor: AppTheme.charcoal,
-      title: FadeInRight(
-        child: const Text(
-          'M4 GROUP',
-          style: TextStyle(
-            color: AppTheme.primaryGold,
-            fontWeight: FontWeight.bold,
-            letterSpacing: 2,
-          ),
-        ),
+      backgroundColor: AppTheme.luxuryBlack,
+      surfaceTintColor: Colors.transparent,
+      title: Text(
+        'M4 GROUP',
+        style: AppTheme.luxuryTheme.textTheme.titleLarge,
       ),
-      iconTheme: const IconThemeData(color: AppTheme.primaryGold),
       actions: [
         IconButton(
-          onPressed: () => context.push(AppConstants.contact),
-          icon: const Icon(Icons.contact_support_outlined),
+          onPressed: () => context.push(AppConstants.projects),
+          icon: const Icon(Icons.search_rounded),
         ),
       ],
     );
   }
 
-  Widget _buildSectionHeader(BuildContext context, String title) {
+  Widget _buildSectionTitle(BuildContext context, String title) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Row(
         children: [
           Container(
-            width: 5,
-            height: 25,
+            width: 4,
+            height: 24,
             decoration: BoxDecoration(
-              color: AppTheme.primaryGold,
+              gradient: AppTheme.goldGradient,
               borderRadius: BorderRadius.circular(2),
             ),
           ),
-          const SizedBox(width: 10),
+          const SizedBox(width: 12),
           Text(
-            title,
+            title.toUpperCase(),
             style: const TextStyle(
-              fontSize: 18,
+              color: AppTheme.white,
               fontWeight: FontWeight.bold,
-              letterSpacing: 1.2,
+              letterSpacing: 2,
+              fontSize: 16,
             ),
           ),
         ],
@@ -113,66 +97,68 @@ class HomeScreen extends StatelessWidget {
 
   Widget _buildAboutSection(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(20.0),
-      child: GlassCard(
-        child: Column(
-          children: [
-            const Text(
-              'A LEGACY OF EXCELLENCE',
-              style: TextStyle(
-                color: AppTheme.primaryGold,
-                fontWeight: FontWeight.bold,
-                letterSpacing: 1.5,
+      padding: const EdgeInsets.all(20),
+      child: FadeInUp(
+        child: LuxuryContainer(
+          padding: const EdgeInsets.all(25),
+          child: Column(
+            children: [
+              const Text(
+                'A LEGACY OF EXCELLENCE',
+                style: TextStyle(
+                    color: AppTheme.primaryGold,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 2),
               ),
-            ),
-            const SizedBox(height: 15),
-            Text(
-              'M4 Group is a multifaceted corporate entity dedicated to luxury real estate, innovative construction, and premium lifestyle ventures.',
-              textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.bodyLarge,
-            ),
-            const SizedBox(height: 15),
-            TextButton(
-              onPressed: () => context.push(AppConstants.about),
-              child: const Text('KNOW MORE',
-                  style: TextStyle(color: AppTheme.primaryGold)),
-            ),
-          ],
+              const SizedBox(height: 15),
+              const Text(
+                'Designing the future of luxury real estate, construction and lifestyle ventures across the globe.',
+                textAlign: TextAlign.center,
+                style: TextStyle(color: AppTheme.softGrey, fontSize: 15),
+              ),
+              const SizedBox(height: 20),
+              GoldButton(
+                label: 'Our Story',
+                onPressed: () => context.push(AppConstants.about),
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 
-  Widget _buildHighlightsGrid(BuildContext context) {
+  Widget _buildBusinessVerticals(BuildContext context) {
     return SizedBox(
       height: 180,
       child: ListView(
         scrollDirection: Axis.horizontal,
-        padding: const EdgeInsets.symmetric(horizontal: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
         children: [
-          _buildBusinessCard(context, 'Real Estate', Icons.home_work),
-          _buildBusinessCard(context, 'Construction', Icons.build),
-          _buildBusinessCard(context, 'Luxury Villas', Icons.pool),
+          _buildVerticalCard(context, 'Real Estate', Icons.home_work_rounded),
+          _buildVerticalCard(
+              context, 'Construction', Icons.architecture_rounded),
+          _buildVerticalCard(context, 'Luxury Villas', Icons.villa_rounded),
         ],
       ),
     );
   }
 
-  Widget _buildBusinessCard(BuildContext context, String title, IconData icon) {
-    return Container(
-      width: 150,
-      margin: const EdgeInsets.only(right: 15),
-      child: GlassCard(
-        padding: const EdgeInsets.all(15),
+  Widget _buildVerticalCard(BuildContext context, String title, IconData icon) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 10),
+      child: LuxuryContainer(
+        radius: 20,
+        padding: const EdgeInsets.all(20),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(icon, size: 35, color: AppTheme.primaryGold),
-            const SizedBox(height: 12),
+            Icon(icon, color: AppTheme.primaryGold, size: 35),
+            const SizedBox(height: 15),
             Text(
               title,
-              textAlign: TextAlign.center,
-              style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 14),
+              style: const TextStyle(
+                  color: AppTheme.white, fontWeight: FontWeight.bold),
             ),
           ],
         ),
@@ -182,169 +168,69 @@ class HomeScreen extends StatelessWidget {
 
   Widget _buildVenturesList(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
+      padding: const EdgeInsets.all(20),
       child: Column(
         children: [
-          _buildVentureItem(context, 'M4 Aura Heights', 'Grant Road, Mumbai'),
-          const SizedBox(height: 15),
-          _buildVentureItem(context, 'Eu4ria Villas', 'Lonavala'),
+          _buildVentureCard(context, 'M4 Aura Heights', 'Grant Road, Mumbai',
+              'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=1935'),
+          const SizedBox(height: 20),
+          _buildVentureCard(context, 'Eu4ria Villas', 'Lonavala',
+              'https://images.unsplash.com/photo-1613490493576-7fde63acd811?q=80&w=2071'),
         ],
       ),
     );
   }
 
-  Widget _buildVentureItem(BuildContext context, String title, String loc) {
-    return GestureDetector(
-      onTap: () => context.push(AppConstants.projects),
-      child: Container(
-        height: 100,
-        decoration: BoxDecoration(
-          color: AppTheme.charcoal,
-          borderRadius: BorderRadius.circular(15),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withValues(alpha: 0.2),
-              blurRadius: 10,
-              offset: const Offset(0, 5),
-            ),
-          ],
-        ),
-        child: Row(
-          children: [
-            Container(
-              width: 100,
-              decoration: const BoxDecoration(
-                color: AppTheme.darkGrey,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(15),
-                  bottomLeft: Radius.circular(15),
-                ),
-              ),
-              child: const Icon(Icons.apartment,
-                  color: AppTheme.primaryGold, size: 40),
-            ),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(15.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      title,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                      ),
-                    ),
-                    const SizedBox(height: 4),
-                    Text(
-                      loc,
-                      style:
-                          const TextStyle(color: Colors.white70, fontSize: 13),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            const Padding(
-              padding: EdgeInsets.only(right: 15),
-              child: Icon(Icons.arrow_forward_ios,
-                  color: AppTheme.primaryGold, size: 16),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildBottomNav(BuildContext context) {
-    return BottomNavigationBar(
-      backgroundColor: AppTheme.charcoal,
-      selectedItemColor: AppTheme.primaryGold,
-      unselectedItemColor: Colors.white54,
-      type: BottomNavigationBarType.fixed,
-      currentIndex: 0,
-      onTap: (index) {
-        if (index == 1) context.push(AppConstants.projects);
-        if (index == 2) context.push(AppConstants.gallery);
-        if (index == 3) context.push(AppConstants.contact);
-      },
-      items: const [
-        BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-        BottomNavigationBarItem(icon: Icon(Icons.apartment), label: 'Projects'),
-        BottomNavigationBarItem(
-            icon: Icon(Icons.photo_library), label: 'Gallery'),
-        BottomNavigationBarItem(
-            icon: Icon(Icons.contact_page), label: 'Contact'),
-      ],
-    );
-  }
-}
-
-class AppDrawer extends StatelessWidget {
-  const AppDrawer({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Drawer(
-      backgroundColor: AppTheme.charcoal,
-      child: ListView(
+  Widget _buildVentureCard(
+      BuildContext context, String title, String loc, String img) {
+    return FadeInLeft(
+      child: LuxuryContainer(
         padding: EdgeInsets.zero,
-        children: [
-          const DrawerHeader(
-            decoration: BoxDecoration(color: Colors.black),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(Icons.apartment_rounded,
-                    size: 50, color: AppTheme.primaryGold),
-                SizedBox(height: 10),
-                Text(
-                  'M4 GROUP',
-                  style: TextStyle(
-                    color: AppTheme.primaryGold,
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: 2,
+        child: InkWell(
+          onTap: () => context.push(AppConstants.projects),
+          child: Row(
+            children: [
+              ClipRRect(
+                borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(22),
+                    bottomLeft: Radius.circular(22)),
+                child: Image.network(img,
+                    width: 120, height: 120, fit: BoxFit.cover),
+              ),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(15),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(title,
+                          style: const TextStyle(
+                              color: AppTheme.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16)),
+                      const SizedBox(height: 5),
+                      Text(loc,
+                          style: const TextStyle(
+                              color: AppTheme.softGrey, fontSize: 13)),
+                      const SizedBox(height: 10),
+                      const Text('VIEW DETAILS',
+                          style: TextStyle(
+                              color: AppTheme.primaryGold,
+                              fontSize: 11,
+                              fontWeight: FontWeight.bold)),
+                    ],
                   ),
                 ),
-              ],
-            ),
+              ),
+              const Padding(
+                padding: EdgeInsets.only(right: 15),
+                child: Icon(Icons.chevron_right_rounded,
+                    color: AppTheme.primaryGold),
+              ),
+            ],
           ),
-          _buildDrawerItem(context, 'Home', Icons.home, AppConstants.home),
-          _buildDrawerItem(
-              context, 'About Us', Icons.info_outline, AppConstants.about),
-          _buildDrawerItem(context, 'Services', Icons.miscellaneous_services,
-              AppConstants.services),
-          _buildDrawerItem(
-              context, 'Projects', Icons.apartment, AppConstants.projects),
-          _buildDrawerItem(
-              context, 'Gallery', Icons.photo_library, AppConstants.gallery),
-          _buildDrawerItem(context, 'Blogs & News', Icons.article_outlined,
-              AppConstants.blog),
-          _buildDrawerItem(
-              context, 'Careers', Icons.work_outline, AppConstants.career),
-          _buildDrawerItem(context, 'Contact Us', Icons.contact_mail_outlined,
-              AppConstants.contact),
-          const Divider(color: Colors.white24),
-          _buildDrawerItem(context, 'Inquiry Form', Icons.message_outlined,
-              AppConstants.inquiry),
-        ],
+        ),
       ),
-    );
-  }
-
-  Widget _buildDrawerItem(
-      BuildContext context, String title, IconData icon, String route) {
-    return ListTile(
-      leading: Icon(icon, color: Colors.white70),
-      title: Text(title, style: const TextStyle(color: Colors.white)),
-      onTap: () {
-        Navigator.pop(context);
-        context.push(route);
-      },
     );
   }
 }

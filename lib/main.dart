@@ -22,9 +22,7 @@ class M4GroupApp extends StatelessWidget {
     return MaterialApp.router(
       title: 'M4 Group',
       debugShowCheckedModeBanner: false,
-      theme: AppTheme.lightTheme,
-      darkTheme: AppTheme.darkTheme,
-      themeMode: ThemeMode.system,
+      theme: AppTheme.luxuryTheme,
       routerConfig: appRouter,
     );
   }

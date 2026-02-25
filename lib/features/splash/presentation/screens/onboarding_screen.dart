@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:animate_do/animate_do.dart';
-import '../../../../core/constants/app_constants.dart';
 import '../../../../core/theme/app_theme.dart';
+import '../../../../core/constants/app_constants.dart';
+import '../../../../widgets/luxury_widgets.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -12,110 +12,119 @@ class OnboardingScreen extends StatefulWidget {
 }
 
 class _OnboardingScreenState extends State<OnboardingScreen> {
-  final PageController _controller = PageController();
+  final PageController _pageController = PageController();
   int _currentPage = 0;
 
-  final List<Map<String, String>> _onboardingData = [
-    {
-      'title': 'LUXURY LIVING',
-      'desc':
-          'Experience the pinnacle of comfort and style in our premium residences.'
-    },
-    {
-      'title': 'INNOVATIVE DESIGN',
-      'desc':
-          'Modern architecture that blends functionality with aesthetic brilliance.'
-    },
-    {
-      'title': 'TRUSTED LEGACY',
-      'desc': 'Building landmarks that stand the test of time since decades.'
-    },
+  final List<OnboardingData> _data = [
+    OnboardingData(
+      title: 'Timeless\nElegance',
+      subtitle: 'Experience real estate like never before with M4 Group.',
+      image:
+          'https://images.unsplash.com/photo-1600585154340-be6199f7c096?q=80&w=2070',
+    ),
+    OnboardingData(
+      title: 'Premium\nDevelopments',
+      subtitle: 'Award-winning architecture and construction quality.',
+      image:
+          'https://images.unsplash.com/photo-1613490493576-7fde63acd811?q=80&w=2071',
+    ),
+    OnboardingData(
+      title: 'Global\nImpact',
+      subtitle: 'Expanding our footprint across luxury lifestyle sectors.',
+      image:
+          'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070',
+    ),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppTheme.charcoal,
-      body: Column(
+      body: Stack(
         children: [
-          Expanded(
-            child: PageView.builder(
-              controller: _controller,
-              onPageChanged: (value) => setState(() => _currentPage = value),
-              itemCount: _onboardingData.length,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.all(40.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      FadeInDown(
-                        child: const Icon(Icons.apartment_outlined,
-                            size: 100, color: AppTheme.primaryGold),
+          PageView.builder(
+            controller: _pageController,
+            onPageChanged: (index) => setState(() => _currentPage = index),
+            itemCount: _data.length,
+            itemBuilder: (context, index) {
+              return Stack(
+                fit: StackFit.expand,
+                children: [
+                  Image.network(_data[index].image, fit: BoxFit.cover),
+                  Container(
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [
+                          Colors.transparent,
+                          AppTheme.luxuryBlack.withValues(alpha: 0.8),
+                          AppTheme.luxuryBlack,
+                        ],
                       ),
-                      const SizedBox(height: 40),
-                      FadeInUp(
-                        child: Text(
-                          _onboardingData[index]['title']!,
-                          style: const TextStyle(
-                              color: AppTheme.primaryGold,
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                      const SizedBox(height: 20),
-                      Text(
-                        _onboardingData[index]['desc']!,
-                        textAlign: TextAlign.center,
-                        style: const TextStyle(
-                            color: Colors.white70, fontSize: 16),
-                      ),
-                    ],
+                    ),
                   ),
-                );
-              },
-            ),
+                  Positioned(
+                    bottom: 120,
+                    left: 20,
+                    right: 20,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          _data[index].title.toUpperCase(),
+                          style: AppTheme.luxuryTheme.textTheme.displayLarge
+                              ?.copyWith(
+                            color: AppTheme.white,
+                            height: 1.1,
+                          ),
+                        ),
+                        const SizedBox(height: 20),
+                        Text(
+                          _data[index].subtitle,
+                          style: const TextStyle(
+                              color: AppTheme.softGrey, fontSize: 16),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              );
+            },
           ),
-          Padding(
-            padding: const EdgeInsets.all(40),
+          Positioned(
+            bottom: 40,
+            left: 20,
+            right: 20,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Row(
-                  children: List.generate(
-                    _onboardingData.length,
-                    (index) => Container(
+                  children: List.generate(_data.length, (index) {
+                    return AnimatedContainer(
+                      duration: const Duration(milliseconds: 300),
+                      width: _currentPage == index ? 30 : 10,
+                      height: 5,
                       margin: const EdgeInsets.only(right: 5),
-                      height: 10,
-                      width: _currentPage == index ? 20 : 10,
                       decoration: BoxDecoration(
                         color: _currentPage == index
                             ? AppTheme.primaryGold
-                            : Colors.white24,
+                            : AppTheme.softGrey.withValues(alpha: 0.3),
                         borderRadius: BorderRadius.circular(5),
                       ),
-                    ),
-                  ),
+                    );
+                  }),
                 ),
-                ElevatedButton(
+                GoldButton(
+                  label: _currentPage == _data.length - 1 ? 'Start' : 'Next',
                   onPressed: () {
-                    if (_currentPage == _onboardingData.length - 1) {
-                      context.go(AppConstants.home);
+                    if (_currentPage < _data.length - 1) {
+                      _pageController.nextPage(
+                          duration: const Duration(milliseconds: 500),
+                          curve: Curves.easeInOut);
                     } else {
-                      _controller.nextPage(
-                          duration: const Duration(milliseconds: 300),
-                          curve: Curves.easeIn);
+                      context.go(AppConstants.home);
                     }
                   },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AppTheme.primaryGold,
-                    foregroundColor: Colors.white,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10)),
-                  ),
-                  child: Text(_currentPage == _onboardingData.length - 1
-                      ? 'GET STARTED'
-                      : 'NEXT'),
                 ),
               ],
             ),
@@ -124,4 +133,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       ),
     );
   }
+}
+
+class OnboardingData {
+  final String title;
+  final String subtitle;
+  final String image;
+  OnboardingData(
+      {required this.title, required this.subtitle, required this.image});
 }

@@ -1,50 +1,44 @@
 import 'package:flutter/material.dart';
 import 'package:animate_do/animate_do.dart';
 import '../../../../core/theme/app_theme.dart';
+import '../../../../widgets/luxury_widgets.dart';
+import '../../../../widgets/luxury_drawer.dart';
 
 class GalleryScreen extends StatelessWidget {
   const GalleryScreen({super.key});
 
+  final List<String> images = const [
+    'https://images.unsplash.com/photo-1600585154340-be6199f7c096?q=80&w=2070',
+    'https://images.unsplash.com/photo-1613490493576-7fde63acd811?q=80&w=2071',
+    'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070',
+    'https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2069',
+    'https://images.unsplash.com/photo-1541888946425-d81bb19480c5?q=80&w=2070',
+    'https://images.unsplash.com/photo-1448630360428-65ff65dfcf3d?q=80&w=2073',
+  ];
+
   @override
   Widget build(BuildContext context) {
-    final List<String> images = [
-      'https://m4group.in/images/gallery1.jpg',
-      'https://m4group.in/images/gallery2.jpg',
-      'https://m4group.in/images/gallery3.jpg',
-      'https://m4group.in/images/gallery4.jpg',
-      'https://m4group.in/images/gallery5.jpg',
-      'https://m4group.in/images/gallery6.jpg',
-    ];
-
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('GALLERY'),
-        backgroundColor: AppTheme.charcoal,
-        foregroundColor: AppTheme.primaryGold,
-      ),
+      drawer: const LuxuryDrawer(),
+      appBar: AppBar(title: const Text('VISUAL GALLERY')),
       body: GridView.builder(
-        padding: const EdgeInsets.all(10),
+        padding: const EdgeInsets.all(20),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
-          crossAxisSpacing: 10,
-          mainAxisSpacing: 10,
-          childAspectRatio: 1,
+          crossAxisSpacing: 15,
+          mainAxisSpacing: 15,
         ),
         itemCount: images.length,
         itemBuilder: (context, index) {
           return FadeIn(
             delay: Duration(milliseconds: index * 50),
-            child: GestureDetector(
-              onTap: () => _showImageDialog(context, images[index]),
+            child: LuxuryContainer(
+              padding: EdgeInsets.zero,
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(15),
-                child: Image.network(
-                  images[index],
-                  fit: BoxFit.cover,
-                  errorBuilder: (context, error, stackTrace) => Container(
-                    color: Colors.grey[200],
-                    child: const Icon(Icons.photo, color: Colors.grey),
-                  ),
+                borderRadius: BorderRadius.circular(22),
+                child: InkWell(
+                  onTap: () => _showImage(context, images[index]),
+                  child: Image.network(images[index], fit: BoxFit.cover),
                 ),
               ),
             ),
@@ -54,24 +48,30 @@ class GalleryScreen extends StatelessWidget {
     );
   }
 
-  void _showImageDialog(BuildContext context, String imageUrl) {
+  void _showImage(BuildContext context, String url) {
     showDialog(
       context: context,
-      builder: (context) => Dialog(
+      builder: (_) => Dialog(
         backgroundColor: Colors.transparent,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(20),
-              child: Image.network(imageUrl),
-            ),
-            const SizedBox(height: 10),
-            IconButton(
-              onPressed: () => Navigator.pop(context),
-              icon: const Icon(Icons.close, color: Colors.white, size: 30),
-            ),
-          ],
+        child: LuxuryContainer(
+          padding: EdgeInsets.zero,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(22),
+                child: Image.network(url),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(10),
+                child: TextButton(
+                  onPressed: () => Navigator.pop(context),
+                  child: const Text('CLOSE',
+                      style: TextStyle(color: AppTheme.primaryGold)),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

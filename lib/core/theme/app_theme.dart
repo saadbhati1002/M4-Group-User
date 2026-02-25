@@ -2,81 +2,103 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AppTheme {
-  // Use M4 Group Brand Colors
+  // Luxury Palette
+  static const Color luxuryBlack = Color(0xFF0F0F0F);
+  static const Color secondaryBlack = Color(0xFF181818);
   static const Color primaryGold = Color(0xFFD4AF37);
-  static const Color secondaryGold = Color(0xFFC5A028);
-  static const Color charcoal = Color(0xFF1A1A1A);
-  static const Color darkGrey = Color(0xFF2C2C2C);
-  static const Color lightGrey = Color(0xFFF5F5F5);
+  static const Color softGrey = Color(0xFFCFCFCF);
   static const Color white = Colors.white;
-  static const Color black = Colors.black;
 
-  static ThemeData get lightTheme {
-    return ThemeData(
-      useMaterial3: true,
-      brightness: Brightness.light,
-      primaryColor: charcoal,
-      scaffoldBackgroundColor: white,
-      colorScheme: const ColorScheme.light(
-        primary: charcoal,
-        secondary: primaryGold,
-        surface: white,
-        onSurface: charcoal,
-      ),
-      textTheme: GoogleFonts.poppinsTextTheme().copyWith(
-        displayLarge:
-            GoogleFonts.poppins(fontWeight: FontWeight.bold, color: charcoal),
-        titleLarge:
-            GoogleFonts.poppins(fontWeight: FontWeight.w600, color: charcoal),
-        bodyLarge: GoogleFonts.poppins(color: charcoal),
-      ),
-      appBarTheme: const AppBarTheme(
-        backgroundColor: white,
-        elevation: 0,
-        iconTheme: IconThemeData(color: charcoal),
-      ),
-    );
-  }
+  // Gold Gradients
+  static const LinearGradient goldGradient = LinearGradient(
+    colors: [
+      Color(0xFFBF953F),
+      Color(0xFFFCF6BA),
+      Color(0xFFB38728),
+      Color(0xFFFBF5B7),
+      Color(0xFFAA771C)
+    ],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+  );
 
-  static ThemeData get darkTheme {
+  static ThemeData get luxuryTheme {
     return ThemeData(
       useMaterial3: true,
       brightness: Brightness.dark,
+      scaffoldBackgroundColor: luxuryBlack,
       primaryColor: primaryGold,
-      scaffoldBackgroundColor: black,
       colorScheme: const ColorScheme.dark(
         primary: primaryGold,
         secondary: primaryGold,
-        surface: charcoal,
+        surface: secondaryBlack,
         onSurface: white,
+        onPrimary: luxuryBlack,
       ),
       textTheme:
           GoogleFonts.poppinsTextTheme(ThemeData.dark().textTheme).copyWith(
-        displayLarge:
-            GoogleFonts.poppins(fontWeight: FontWeight.bold, color: white),
-        titleLarge:
-            GoogleFonts.poppins(fontWeight: FontWeight.w600, color: white),
-        bodyLarge: GoogleFonts.poppins(color: Colors.white70),
+        displayLarge: GoogleFonts.playfairDisplay(
+          color: white,
+          fontWeight: FontWeight.bold,
+          fontSize: 32,
+        ),
+        titleLarge: GoogleFonts.poppins(
+          color: primaryGold,
+          fontWeight: FontWeight.w600,
+          letterSpacing: 1.2,
+        ),
+        bodyLarge: GoogleFonts.poppins(color: softGrey),
       ),
       appBarTheme: const AppBarTheme(
-        backgroundColor: black,
+        backgroundColor: Colors.transparent,
         elevation: 0,
-        iconTheme: IconThemeData(color: white),
+        centerTitle: true,
+        iconTheme: IconThemeData(color: primaryGold),
       ),
     );
   }
 
-  // AI-Based Auto Contrast System
-  static Color getContrastColor(Color backgroundColor) {
-    return backgroundColor.computeLuminance() > 0.5
-        ? Colors.black
-        : Colors.white;
+  // Skeuomorphic Shadow Decorators
+  static BoxDecoration skeuomorphicDecoration({
+    double radius = 18,
+    Color color = secondaryBlack,
+    bool isPressed = false,
+  }) {
+    if (isPressed) {
+      return BoxDecoration(
+        color: color,
+        borderRadius: BorderRadius.circular(radius),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.5),
+            offset: const Offset(4, 4),
+            blurRadius: 10,
+            spreadRadius: 1,
+          ),
+          BoxShadow(
+            color: Colors.white.withValues(alpha: 0.1),
+            offset: const Offset(-4, -4),
+            blurRadius: 10,
+            spreadRadius: 1,
+          ),
+        ],
+      );
+    }
+    return BoxDecoration(
+      color: color,
+      borderRadius: BorderRadius.circular(radius),
+      boxShadow: [
+        BoxShadow(
+          color: Colors.black.withValues(alpha: 0.7),
+          offset: const Offset(6, 6),
+          blurRadius: 12,
+        ),
+        BoxShadow(
+          color: Colors.white.withValues(alpha: 0.05),
+          offset: const Offset(-6, -6),
+          blurRadius: 12,
+        ),
+      ],
+    );
   }
-
-  // Premium Enterprise Gradients
-  static const LinearGradient premiumGradient = LinearGradient(
-    begin: Alignment.topLeft,
-    end: Alignment.bottomRight,
-    colors: [charcoal, black],
-  );
 }
