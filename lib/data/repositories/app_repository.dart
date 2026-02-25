@@ -61,4 +61,14 @@ class AppRepository {
       return [];
     }
   }
+
+  Future<Map<String, dynamic>> getHomePageData() async {
+    try {
+      final String response =
+          await rootBundle.loadString(AppConstants.homepageDataPath);
+      return json.decode(response);
+    } catch (e) {
+      return {};
+    }
+  }
 }

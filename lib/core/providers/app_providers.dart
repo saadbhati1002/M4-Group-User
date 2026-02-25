@@ -14,3 +14,8 @@ final servicesProvider = FutureProvider<List<ServiceModel>>((ref) async {
   final repository = ref.watch(appRepositoryProvider);
   return repository.getServices();
 });
+
+final homeDataProvider = FutureProvider<Map<String, dynamic>>((ref) async {
+  final repository = ref.watch(appRepositoryProvider);
+  return repository.getHomePageData();
+});

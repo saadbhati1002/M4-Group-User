@@ -1,6 +1,7 @@
 class AppConstants {
   static const String appName = 'M4 Group';
   static const String dummyDataPath = 'assets/dummy_data/app_data.json';
+  static const String homepageDataPath = 'assets/dummy_data/homepage_data.json';
 
   // Routes
   static const String splash = '/';

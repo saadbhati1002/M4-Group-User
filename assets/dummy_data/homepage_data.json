@@ -1,0 +1,72 @@
+{
+    "hero": {
+        "title": "HOME IS WHERE YOUR STORY BEGINS",
+        "subtitle": "A boutique real estate developer from South Mumbai, crafting refined living spaces with fine craftsmanship.",
+        "imageUrl": "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070",
+        "ctaText": "START YOUR CHAPTER"
+    },
+    "about": {
+        "title": "A LEGACY OF EXCELLENCE",
+        "description": "M4 Group, with over a decade of excellence in Mumbai’s real estate landscape, has established itself as a trusted name in premium residential development. Renowned for delivering homes that blend contemporary design with enduring quality.",
+        "imageUrl": "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2069"
+    },
+    "businesses": [
+        {
+            "title": "Real Estate",
+            "description": "Crafting landmark residential and commercial spaces in prime city locations.",
+            "icon": "business_outlined"
+        },
+        {
+            "title": "Construction",
+            "description": "Timely delivery and uncompromising quality in every infrastructure project.",
+            "icon": "architecture_outlined"
+        },
+        {
+            "title": "Luxury Villas",
+            "description": "Bespoke holiday homes designed for an elevated lifestyle in scenic locales.",
+            "icon": "villa_outlined"
+        }
+    ],
+    "projects": [
+        {
+            "id": "aura-heights",
+            "title": "Aura Heights",
+            "location": "Grant Road, Mumbai",
+            "imageUrl": "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=1935",
+            "status": "COMPLETED"
+        },
+        {
+            "id": "ocean-view",
+            "title": "Ocean View",
+            "location": "Mazagon, Mumbai",
+            "imageUrl": "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070",
+            "status": "ONGOING"
+        }
+    ],
+    "mission": {
+        "title": "OUR MISSION",
+        "content": "To redefine modern luxury living by crafting homes with cutting edge design, enduring quality and thoughtful amenities delivered with trust, transparency, timeliness, and a human touch."
+    },
+    "vision": {
+        "title": "OUR VISION",
+        "content": "To be recognized as a trusted developer known for redefining urban living with elegant homes, landmark projects, and a commitment to excellence that stands the test of time."
+    },
+    "blogs": [
+        {
+            "title": "The Evolution of South Mumbai Architecture",
+            "excerpt": "Exploring how Mumbai's skyline is transitioning from traditional structures to modern luxury landmarks.",
+            "imageUrl": "https://images.unsplash.com/photo-1541888946425-d81bb19480c5?q=80&w=2070",
+            "date": "Oct 25, 2025"
+        },
+        {
+            "title": "Why Mazagon is the Next Real Estate Hub",
+            "excerpt": "Discovering the untapped potential of Mumbai's southeast coast for premium residential growth.",
+            "imageUrl": "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2069",
+            "date": "Nov 12, 2025"
+        }
+    ],
+    "footerCta": {
+        "title": "READY TO EXPERIENCE THE M4 LIFESTYLE?",
+        "ctaText": "ENQUIRE NOW"
+    }
+}

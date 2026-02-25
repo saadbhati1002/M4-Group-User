@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import '../core/theme/app_theme.dart';
 
 class LuxuryContainer extends StatelessWidget {
+  final double? width;
+  final double? height;
   final Widget? child;
   final double radius;
   final EdgeInsetsGeometry? padding;
@@ -11,6 +13,8 @@ class LuxuryContainer extends StatelessWidget {
 
   const LuxuryContainer({
     super.key,
+    this.width,
+    this.height,
     this.child,
     this.radius = 22,
     this.padding,
@@ -23,6 +27,8 @@ class LuxuryContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 300),
+      width: width,
+      height: height,
       margin: margin,
       padding: padding,
       decoration: AppTheme.skeuomorphicDecoration(
