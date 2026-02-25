@@ -65,4 +65,18 @@ class AppTheme {
       ),
     );
   }
+
+  // AI-Based Auto Contrast System
+  static Color getContrastColor(Color backgroundColor) {
+    return backgroundColor.computeLuminance() > 0.5
+        ? Colors.black
+        : Colors.white;
+  }
+
+  // Premium Enterprise Gradients
+  static const LinearGradient premiumGradient = LinearGradient(
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+    colors: [charcoal, black],
+  );
 }

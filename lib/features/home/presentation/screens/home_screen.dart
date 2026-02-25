@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../core/constants/app_constants.dart';
 import '../../../../core/theme/app_theme.dart';
+import '../../../../widgets/parallax_hero_slider.dart';
 import '../../../../widgets/glass_card.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -19,15 +19,40 @@ class HomeScreen extends StatelessWidget {
           SliverToBoxAdapter(
             child: Column(
               children: [
-                _buildHeroSlider(),
-                _buildAboutSection(context),
-                _buildBusinessSection(context),
-                _buildVenturesSection(context),
+                const ParallaxHeroSlider(
+                  images: [
+                    'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070',
+                    'https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2069',
+                    'https://images.unsplash.com/photo-1541888946425-d81bb19480c5?q=80&w=2070',
+                  ],
+                ),
+                const SizedBox(height: 30),
+                FadeInUp(
+                  duration: const Duration(milliseconds: 800),
+                  child: _buildAboutSection(context),
+                ),
+                const SizedBox(height: 40),
+                _buildSectionHeader(context, 'BUSINESS HIGHLIGHTS'),
+                FadeInLeft(
+                  child: _buildHighlightsGrid(context),
+                ),
+                const SizedBox(height: 40),
+                _buildSectionHeader(context, 'CURRENT VENTURES'),
+                FadeInRight(
+                  child: _buildVenturesList(context),
+                ),
                 const SizedBox(height: 50),
               ],
             ),
           ),
         ],
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () => context.push(AppConstants.contact),
+        backgroundColor: AppTheme.primaryGold,
+        foregroundColor: Colors.black,
+        icon: const Icon(Icons.support_agent),
+        label: const Text('QUICK CONNECT'),
       ),
       bottomNavigationBar: _buildBottomNav(context),
     );
@@ -59,79 +84,30 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildHeroSlider() {
-    final List<String> images = [
-      'https://m4group.in/images/slider1.jpg',
-      'https://m4group.in/images/slider2.jpg',
-      'https://m4group.in/images/slider3.jpg',
-    ];
-
-    return CarouselSlider(
-      options: CarouselOptions(
-        height: 400.0,
-        viewportFraction: 1.0,
-        autoPlay: true,
-        enlargeCenterPage: false,
+  Widget _buildSectionHeader(BuildContext context, String title) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      child: Row(
+        children: [
+          Container(
+            width: 5,
+            height: 25,
+            decoration: BoxDecoration(
+              color: AppTheme.primaryGold,
+              borderRadius: BorderRadius.circular(2),
+            ),
+          ),
+          const SizedBox(width: 10),
+          Text(
+            title,
+            style: const TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              letterSpacing: 1.2,
+            ),
+          ),
+        ],
       ),
-      items: images.map((i) {
-        return Builder(
-          builder: (BuildContext context) {
-            return Stack(
-              children: [
-                Container(
-                  width: MediaQuery.of(context).size.width,
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: NetworkImage(i),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-                Container(
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [
-                        Colors.transparent,
-                        Colors.black.withValues(alpha: 0.8),
-                      ],
-                    ),
-                  ),
-                ),
-                Positioned(
-                  bottom: 40,
-                  left: 20,
-                  child: FadeInLeft(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text(
-                          'CRAFTING TIMELESS\nRESIDENCES',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 28,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        const SizedBox(height: 10),
-                        ElevatedButton(
-                          onPressed: () => context.push(AppConstants.projects),
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: AppTheme.primaryGold,
-                            foregroundColor: Colors.white,
-                          ),
-                          child: const Text('VIEW PROJECTS'),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            );
-          },
-        );
-      }).toList(),
     );
   }
 
@@ -141,14 +117,12 @@ class HomeScreen extends StatelessWidget {
       child: GlassCard(
         child: Column(
           children: [
-            FadeInUp(
-              child: const Text(
-                'A LEGACY OF EXCELLENCE',
-                style: TextStyle(
-                  color: AppTheme.primaryGold,
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: 1.5,
-                ),
+            const Text(
+              'A LEGACY OF EXCELLENCE',
+              style: TextStyle(
+                color: AppTheme.primaryGold,
+                fontWeight: FontWeight.bold,
+                letterSpacing: 1.5,
               ),
             ),
             const SizedBox(height: 15),
@@ -169,63 +143,48 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildBusinessSection(BuildContext context) {
-    return Column(
-      children: [
-        const Padding(
-          padding: EdgeInsets.symmetric(vertical: 30),
-          child: Text(
-            'OUR BUSINESSES',
-            style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-          ),
-        ),
-        SizedBox(
-          height: 200,
-          child: ListView(
-            scrollDirection: Axis.horizontal,
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            children: [
-              _buildBusinessCard(context, 'Real Estate', Icons.home_work),
-              _buildBusinessCard(context, 'Construction', Icons.build),
-              _buildBusinessCard(context, 'Luxury Villas', Icons.pool),
-            ],
-          ),
-        ),
-      ],
+  Widget _buildHighlightsGrid(BuildContext context) {
+    return SizedBox(
+      height: 180,
+      child: ListView(
+        scrollDirection: Axis.horizontal,
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        children: [
+          _buildBusinessCard(context, 'Real Estate', Icons.home_work),
+          _buildBusinessCard(context, 'Construction', Icons.build),
+          _buildBusinessCard(context, 'Luxury Villas', Icons.pool),
+        ],
+      ),
     );
   }
 
   Widget _buildBusinessCard(BuildContext context, String title, IconData icon) {
     return Container(
-      width: 160,
+      width: 150,
       margin: const EdgeInsets.only(right: 15),
       child: GlassCard(
         padding: const EdgeInsets.all(15),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(icon, size: 40, color: AppTheme.primaryGold),
-            const SizedBox(height: 10),
-            Text(title,
-                textAlign: TextAlign.center,
-                style: const TextStyle(fontWeight: FontWeight.bold)),
+            Icon(icon, size: 35, color: AppTheme.primaryGold),
+            const SizedBox(height: 12),
+            Text(
+              title,
+              textAlign: TextAlign.center,
+              style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 14),
+            ),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildVenturesSection(BuildContext context) {
+  Widget _buildVenturesList(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(20.0),
+      padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            'CURRENT VENTURES',
-            style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-          ),
-          const SizedBox(height: 20),
           _buildVentureItem(context, 'M4 Aura Heights', 'Grant Road, Mumbai'),
           const SizedBox(height: 15),
           _buildVentureItem(context, 'Eu4ria Villas', 'Lonavala'),
@@ -236,24 +195,33 @@ class HomeScreen extends StatelessWidget {
 
   Widget _buildVentureItem(BuildContext context, String title, String loc) {
     return GestureDetector(
-      onTap: () => context.push(AppConstants.projectDetail),
+      onTap: () => context.push(AppConstants.projects),
       child: Container(
-        height: 120,
+        height: 100,
         decoration: BoxDecoration(
           color: AppTheme.charcoal,
           borderRadius: BorderRadius.circular(15),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withValues(alpha: 0.2),
+              blurRadius: 10,
+              offset: const Offset(0, 5),
+            ),
+          ],
         ),
         child: Row(
           children: [
             Container(
-              width: 120,
+              width: 100,
               decoration: const BoxDecoration(
-                color: Colors.grey,
+                color: AppTheme.darkGrey,
                 borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(15),
-                    bottomLeft: Radius.circular(15)),
+                  topLeft: Radius.circular(15),
+                  bottomLeft: Radius.circular(15),
+                ),
               ),
-              child: const Icon(Icons.image, color: Colors.white54),
+              child: const Icon(Icons.apartment,
+                  color: AppTheme.primaryGold, size: 40),
             ),
             Expanded(
               child: Padding(
@@ -262,20 +230,28 @@ class HomeScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(title,
-                        style: const TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18)),
-                    const SizedBox(height: 5),
-                    Text(loc, style: const TextStyle(color: Colors.white70)),
+                    Text(
+                      title,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      loc,
+                      style:
+                          const TextStyle(color: Colors.white70, fontSize: 13),
+                    ),
                   ],
                 ),
               ),
             ),
             const Padding(
               padding: EdgeInsets.only(right: 15),
-              child: Icon(Icons.chevron_right, color: AppTheme.primaryGold),
+              child: Icon(Icons.arrow_forward_ios,
+                  color: AppTheme.primaryGold, size: 16),
             ),
           ],
         ),
@@ -315,20 +291,25 @@ class AppDrawer extends StatelessWidget {
     return Drawer(
       backgroundColor: AppTheme.charcoal,
       child: ListView(
+        padding: EdgeInsets.zero,
         children: [
           const DrawerHeader(
-            decoration: BoxDecoration(color: Colors.black26),
+            decoration: BoxDecoration(color: Colors.black),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(Icons.apartment_rounded,
-                    size: 60, color: AppTheme.primaryGold),
+                    size: 50, color: AppTheme.primaryGold),
                 SizedBox(height: 10),
-                Text('M4 GROUP',
-                    style: TextStyle(
-                        color: AppTheme.primaryGold,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold)),
+                Text(
+                  'M4 GROUP',
+                  style: TextStyle(
+                    color: AppTheme.primaryGold,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 2,
+                  ),
+                ),
               ],
             ),
           ),
@@ -348,8 +329,8 @@ class AppDrawer extends StatelessWidget {
           _buildDrawerItem(context, 'Contact Us', Icons.contact_mail_outlined,
               AppConstants.contact),
           const Divider(color: Colors.white24),
-          _buildDrawerItem(
-              context, 'Inquiry Form', Icons.message_outlined, '/inquiry'),
+          _buildDrawerItem(context, 'Inquiry Form', Icons.message_outlined,
+              AppConstants.inquiry),
         ],
       ),
     );

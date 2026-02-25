@@ -31,4 +31,17 @@ class ProjectModel {
       rera: json['rera'],
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name,
+      'location': location,
+      'status': status,
+      'description': description,
+      'image': image,
+      'amenities': amenities,
+      'rera': rera,
+    };
+  }
 }

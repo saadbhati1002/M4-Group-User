@@ -19,4 +19,13 @@ class ServiceModel {
       icon: json['icon'],
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'title': title,
+      'description': description,
+      'icon': icon,
+    };
+  }
 }

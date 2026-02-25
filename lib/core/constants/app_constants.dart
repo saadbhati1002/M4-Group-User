@@ -14,4 +14,5 @@ class AppConstants {
   static const String contact = '/contact';
   static const String blog = '/blog';
   static const String career = '/career';
+  static const String inquiry = '/inquiry';
 }

@@ -1,0 +1,66 @@
+﻿Analyzing M4-Group-User...                                      
+
+   info - Don't invoke 'print' in production code - lib\core\services\enterprise_services.dart:5:5 - avoid_print
+   info - Don't invoke 'print' in production code - lib\core\services\enterprise_services.dart:9:5 - avoid_print
+   info - Don't invoke 'print' in production code - lib\core\services\enterprise_services.dart:16:5 - avoid_print
+   info - Don't invoke 'print' in production code - lib\core\services\enterprise_services.dart:20:5 - avoid_print
+  error - Target of URI doesn't exist: '../../../widgets/parallax_hero_slider.dart' - lib\features\home\presentation\screens\home_screen.dart:7:8 - uri_does_not_exist
+  error - The name 'ParallaxHeroSlider' isn't a class - lib\features\home\presentation\screens\home_screen.dart:23:23 - creation_with_non_type
+  error - The name 'SizedBox' isn't a class - lib\features\home\presentation\screens\home_screen.dart:30:23 - creation_with_non_type
+  error - The name 'SizedBox' isn't a class - lib\features\home\presentation\screens\home_screen.dart:35:23 - creation_with_non_type
+  error - The method '_buildSectionHeader' isn't defined for the type 'HomeScreen' - lib\features\home\presentation\screens\home_screen.dart:36:17 - undefined_method
+  error - The method '_buildHighlightsGrid' isn't defined for the type 'HomeScreen' - lib\features\home\presentation\screens\home_screen.dart:38:26 - undefined_method
+  error - The name 'SizedBox' isn't a class - lib\features\home\presentation\screens\home_screen.dart:40:23 - creation_with_non_type
+  error - The method '_buildSectionHeader' isn't defined for the type 'HomeScreen' - lib\features\home\presentation\screens\home_screen.dart:41:17 - undefined_method
+  error - The method '_buildVenturesList' isn't defined for the type 'HomeScreen' - lib\features\home\presentation\screens\home_screen.dart:43:26 - undefined_method
+  error - The name 'SizedBox' isn't a class - lib\features\home\presentation\screens\home_screen.dart:45:23 - creation_with_non_type
+  error - The getter 'routeContact' isn't defined for the type 'AppConstants' - lib\features\home\presentation\screens\home_screen.dart:52:52 - undefined_getter
+  error - Expected a class member - lib\features\home\presentation\screens\home_screen.dart:88:27 - expected_class_member
+  error - Expected a class member - lib\features\home\presentation\screens\home_screen.dart:88:28 - expected_class_member
+  error - Expected a class member - lib\features\home\presentation\screens\home_screen.dart:89:25 - expected_class_member
+  error - Expected a class member - lib\features\home\presentation\screens\home_screen.dart:89:26 - expected_class_member
+  error - Getters, setters and methods can't be declared to be 'const' - lib\features\home\presentation\screens\home_screen.dart:90:25 - const_method
+   info - The variable name 'SizedBox' isn't a lowerCamelCase identifier - lib\features\home\presentation\screens\home_screen.dart:90:31 - non_constant_identifier_names
+  error - Named parameters must be enclosed in curly braces ('{' and '}') - lib\features\home\presentation\screens\home_screen.dart:90:46 - named_parameter_outside_group
+  error - Using a colon as the separator before a default value is no longer supported - lib\features\home\presentation\screens\home_screen.dart:90:46 - obsolete_colon_for_default_value
+  error - A function body must be provided - lib\features\home\presentation\screens\home_screen.dart:90:51 - missing_function_body
+  error - Expected a class member - lib\features\home\presentation\screens\home_screen.dart:90:51 - expected_class_member
+   info - The variable name 'ElevatedButton' isn't a lowerCamelCase identifier - lib\features\home\presentation\screens\home_screen.dart:91:25 - non_constant_identifier_names
+  error - Named parameters must be enclosed in curly braces ('{' and '}') - lib\features\home\presentation\screens\home_screen.dart:92:36 - named_parameter_outside_group
+  error - Using a colon as the separator before a default value is no longer supported - lib\features\home\presentation\screens\home_screen.dart:92:36 - obsolete_colon_for_default_value
+  error - The default value of an optional parameter must be constant - lib\features\home\presentation\screens\home_screen.dart:92:38 - non_constant_default_value
+  error - Undefined name 'context' - lib\features\home\presentation\screens\home_screen.dart:92:44 - undefined_identifier
+  error - Named parameters must be enclosed in curly braces ('{' and '}') - lib\features\home\presentation\screens\home_screen.dart:93:32 - named_parameter_outside_group
+  error - Using a colon as the separator before a default value is no longer supported - lib\features\home\presentation\screens\home_screen.dart:93:32 - obsolete_colon_for_default_value
+  error - The method 'styleFrom' isn't defined for the type 'Function' - lib\features\home\presentation\screens\home_screen.dart:93:49 - undefined_method
+  error - Named parameters must be enclosed in curly braces ('{' and '}') - lib\features\home\presentation\screens\home_screen.dart:97:32 - named_parameter_outside_group
+  error - Using a colon as the separator before a default value is no longer supported - lib\features\home\presentation\screens\home_screen.dart:97:32 - obsolete_colon_for_default_value
+  error - A function body must be provided - lib\features\home\presentation\screens\home_screen.dart:98:26 - missing_function_body
+  error - Expected a class member - lib\features\home\presentation\screens\home_screen.dart:98:26 - expected_class_member
+  error - Expected a class member - lib\features\home\presentation\screens\home_screen.dart:99:23 - expected_class_member
+  error - Expected a class member - lib\features\home\presentation\screens\home_screen.dart:99:24 - expected_class_member
+  error - Expected a class member - lib\features\home\presentation\screens\home_screen.dart:100:21 - expected_class_member
+  error - Expected a class member - lib\features\home\presentation\screens\home_screen.dart:100:22 - expected_class_member
+  error - Expected a class member - lib\features\home\presentation\screens\home_screen.dart:101:19 - expected_class_member
+  error - Expected a class member - lib\features\home\presentation\screens\home_screen.dart:101:20 - expected_class_member
+  error - Expected a class member - lib\features\home\presentation\screens\home_screen.dart:102:17 - expected_class_member
+  error - Expected a class member - lib\features\home\presentation\screens\home_screen.dart:102:18 - expected_class_member
+  error - Expected a class member - lib\features\home\presentation\screens\home_screen.dart:103:15 - expected_class_member
+  error - Expected a class member - lib\features\home\presentation\screens\home_screen.dart:103:16 - expected_class_member
+  error - Expected a class member - lib\features\home\presentation\screens\home_screen.dart:104:13 - expected_class_member
+  error - Expected a class member - lib\features\home\presentation\screens\home_screen.dart:104:14 - expected_class_member
+  error - Expected a method, getter, setter or operator declaration - lib\features\home\presentation\screens\home_screen.dart:105:12 - expected_executable
+  error - Expected a method, getter, setter or operator declaration - lib\features\home\presentation\screens\home_screen.dart:106:9 - expected_executable
+  error - Unexpected text ';' - lib\features\home\presentation\screens\home_screen.dart:106:10 - unexpected_token
+  error - Expected a method, getter, setter or operator declaration - lib\features\home\presentation\screens\home_screen.dart:107:7 - expected_executable
+  error - Expected a method, getter, setter or operator declaration - lib\features\home\presentation\screens\home_screen.dart:107:8 - expected_executable
+  error - Expected a method, getter, setter or operator declaration - lib\features\home\presentation\screens\home_screen.dart:107:9 - expected_executable
+  error - A function body must be provided - lib\features\home\presentation\screens\home_screen.dart:107:18 - missing_function_body
+  error - Expected a method, getter, setter or operator declaration - lib\features\home\presentation\screens\home_screen.dart:107:18 - expected_executable
+  error - Expected a method, getter, setter or operator declaration - lib\features\home\presentation\screens\home_screen.dart:108:5 - expected_executable
+  error - Unexpected text ';' - lib\features\home\presentation\screens\home_screen.dart:108:6 - unexpected_token
+  error - Expected a method, getter, setter or operator declaration - lib\features\home\presentation\screens\home_screen.dart:109:3 - expected_executable
+warning - The declaration '_buildBusinessSection' isn't referenced - lib\features\home\presentation\screens\home_screen.dart:145:10 - unused_element
+warning - The declaration '_buildVenturesSection' isn't referenced - lib\features\home\presentation\screens\home_screen.dart:191:10 - unused_element
+  error - Expected a method, getter, setter or operator declaration - lib\features\home\presentation\screens\home_screen.dart:281:1 - expected_executable
+
