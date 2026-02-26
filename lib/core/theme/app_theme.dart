@@ -60,43 +60,29 @@ class AppTheme {
 
   // Skeuomorphic Shadow Decorators
   static BoxDecoration skeuomorphicDecoration({
-    double radius = 18,
+    double radius = 22,
     Color color = secondaryBlack,
     bool isPressed = false,
   }) {
-    if (isPressed) {
-      return BoxDecoration(
-        color: color,
-        borderRadius: BorderRadius.circular(radius),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.5),
-            offset: const Offset(4, 4),
-            blurRadius: 10,
-            spreadRadius: 1,
-          ),
-          BoxShadow(
-            color: Colors.white.withValues(alpha: 0.1),
-            offset: const Offset(-4, -4),
-            blurRadius: 10,
-            spreadRadius: 1,
-          ),
-        ],
-      );
-    }
     return BoxDecoration(
       color: color,
       borderRadius: BorderRadius.circular(radius),
+      border: Border.all(
+        color: primaryGold.withValues(alpha: 0.25),
+        width: 1,
+      ),
       boxShadow: [
+        // Light top shadow
         BoxShadow(
-          color: Colors.black.withValues(alpha: 0.7),
-          offset: const Offset(6, 6),
-          blurRadius: 12,
+          color: Colors.white.withValues(alpha: 0.04),
+          offset: const Offset(-4, -4),
+          blurRadius: 6,
         ),
+        // Dark bottom shadow
         BoxShadow(
-          color: Colors.white.withValues(alpha: 0.05),
-          offset: const Offset(-6, -6),
-          blurRadius: 12,
+          color: Colors.black.withValues(alpha: 0.6),
+          offset: const Offset(4, 4),
+          blurRadius: 8,
         ),
       ],
     );

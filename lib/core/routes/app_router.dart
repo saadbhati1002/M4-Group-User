@@ -15,6 +15,8 @@ import '../../data/models/project_model.dart';
 
 import '../../features/misc/presentation/screens/placeholder_screen.dart';
 
+import '../../data/models/project_filter.dart';
+
 final GoRouter appRouter = GoRouter(
   initialLocation: AppConstants.splash,
   routes: [
@@ -40,17 +42,11 @@ final GoRouter appRouter = GoRouter(
     ),
     GoRoute(
       path: AppConstants.projects,
-      builder: (context, state) => const ProjectsScreen(),
-    ),
-    GoRoute(
-      path: AppConstants.projectsOngoing,
-      builder: (context, state) =>
-          const LuxuryPlaceholderScreen(title: 'Ongoing Projects'),
-    ),
-    GoRoute(
-      path: AppConstants.projectsCompleted,
-      builder: (context, state) =>
-          const LuxuryPlaceholderScreen(title: 'Completed Projects'),
+      builder: (context, state) {
+        final filterSlug = state.uri.queryParameters['filter'];
+        final filter = ProjectFilterExtension.fromSlug(filterSlug);
+        return ProjectsScreen(filter: filter);
+      },
     ),
     GoRoute(
       path: AppConstants.projectDetail,

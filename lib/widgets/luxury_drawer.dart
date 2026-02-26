@@ -66,21 +66,21 @@ class _LuxuryDrawerState extends State<LuxuryDrawer> {
                         _DrawerItem(
                           icon: Icons.list_alt_rounded,
                           label: 'All Projects',
-                          route: AppConstants.projects,
+                          route: '${AppConstants.projects}?filter=all',
                           currentRoute: currentRoute,
                           isSubItem: true,
                         ),
                         _DrawerItem(
                           icon: Icons.pending_actions_rounded,
                           label: 'Ongoing Projects',
-                          route: AppConstants.projectsOngoing,
+                          route: '${AppConstants.projects}?filter=ongoing',
                           currentRoute: currentRoute,
                           isSubItem: true,
                         ),
                         _DrawerItem(
                           icon: Icons.task_alt_rounded,
                           label: 'Completed Projects',
-                          route: AppConstants.projectsCompleted,
+                          route: '${AppConstants.projects}?filter=completed',
                           currentRoute: currentRoute,
                           isSubItem: true,
                         ),
@@ -144,7 +144,7 @@ class _LuxuryDrawerState extends State<LuxuryDrawer> {
                 ),
               ),
             ),
-            const _DrawerFooter(),
+            // const _DrawerFooter(), - Removed as per requirements
           ],
         ),
       ),
@@ -210,7 +210,10 @@ class _DrawerItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isSelected = currentRoute == route;
+    final isSelected = currentRoute.startsWith(route.split('?').first) &&
+        (route.contains('?')
+            ? currentRoute.contains(route.split('?').last)
+            : !currentRoute.contains('?'));
 
     return Padding(
       padding: EdgeInsets.only(left: isSubItem ? 30 : 15, right: 15, bottom: 8),
@@ -318,52 +321,4 @@ class GoldSelectionIndicator extends StatelessWidget {
   }
 }
 
-class _DrawerFooter extends StatelessWidget {
-  const _DrawerFooter();
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(20),
-      decoration: const BoxDecoration(
-        color: AppTheme.secondaryBlack,
-        borderRadius: BorderRadius.only(bottomRight: Radius.circular(30)),
-      ),
-      child: Column(
-        children: [
-          const GoldDivider(),
-          const SizedBox(height: 15),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              _SocialIcon(Icons.facebook, () {}),
-              const SizedBox(width: 20),
-              _SocialIcon(Icons.camera_alt_outlined, () {}),
-              const SizedBox(width: 20),
-              _SocialIcon(Icons.alternate_email, () {}),
-            ],
-          ),
-          const SizedBox(height: 10),
-          const Text(
-            'Version 2.0.1 Premium',
-            style: TextStyle(color: Colors.grey, fontSize: 10),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _SocialIcon extends StatelessWidget {
-  final IconData icon;
-  final VoidCallback onTap;
-  const _SocialIcon(this.icon, this.onTap);
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Icon(icon, color: AppTheme.primaryGold, size: 20),
-    );
-  }
-}
+// Footer and social icons removed as per requirements

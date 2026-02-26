@@ -5,20 +5,88 @@
       "name": "M4 Aura Heights",
       "location": "Grant Road, Mumbai",
       "status": "Ongoing",
-      "description": "Experience luxury living at the heart of South Mumbai. M4 Aura Heights offers premium 2 & 3 BHK residences with world-class amenities.",
+      "description": "Experience luxury living at the heart of South Mumbai. M4 Aura Heights offers premium 2 & 3 BHK residences with world-class amenities. The project stands as a testament to modern architectural excellence, combining sleek aesthetics with unparalleled functionality.",
       "image": "https://m4group.in/images/aura-heights.jpg",
-      "amenities": ["Fitness Center", "Landscaped Garden", "Automated Parking", "High Speed Elevators"],
-      "rera": "P51900000000"
+      "amenities": [
+        "Fitness Center",
+        "Landscaped Garden",
+        "Automated Parking",
+        "High Speed Elevators"
+      ],
+      "rera": "P51900000000",
+      "highlights": [
+        {
+          "icon": "apartment",
+          "label": "Luxury 2&3 BHK"
+        },
+        {
+          "icon": "security",
+          "label": "24/7 Security"
+        },
+        {
+          "icon": "park",
+          "label": "Lush Greenery"
+        },
+        {
+          "icon": "location_on",
+          "label": "Prime Location"
+        }
+      ],
+      "gallery": [
+        "https://m4group.in/images/gallery/aura-1.jpg",
+        "https://m4group.in/images/gallery/aura-2.jpg",
+        "https://m4group.in/images/gallery/aura-3.jpg",
+        "https://m4group.in/images/gallery/aura-4.jpg"
+      ],
+      "location_data": {
+        "lat": 18.9610,
+        "lng": 72.8135,
+        "address": "Opposite Grant Road Station, Mumbai, Maharashtra 400007"
+      }
     },
     {
       "id": "2",
       "name": "Eu4ria Villas",
       "location": "Lonavala",
       "status": "Completed",
-      "description": "Escape to tranquility. Exclusive luxury villas in the scenic hills of Lonavala, designed for the ultimate getaway.",
+      "description": "Escape to tranquility. Exclusive luxury villas in the scenic hills of Lonavala, designed for the ultimate getaway. Eu4ria Villas offers a unique blend of nature and luxury, providing an oasis of calm away from the hustle and bustle of city life.",
       "image": "https://m4group.in/images/eu4ria-villas.jpg",
-      "amenities": ["Private Pool", "24x7 Security", "Gated Community", "Luxury Interiors"],
-      "rera": "P52100000000"
+      "amenities": [
+        "Private Pool",
+        "24x7 Security",
+        "Gated Community",
+        "Luxury Interiors"
+      ],
+      "rera": "P52100000000",
+      "highlights": [
+        {
+          "icon": "pool",
+          "label": "Private Pool"
+        },
+        {
+          "icon": "mountain",
+          "label": "Hill View"
+        },
+        {
+          "icon": "fence",
+          "label": "Gated Community"
+        },
+        {
+          "icon": "chair",
+          "label": "Designer Interiors"
+        }
+      ],
+      "gallery": [
+        "https://m4group.in/images/gallery/villa-1.jpg",
+        "https://m4group.in/images/gallery/villa-2.jpg",
+        "https://m4group.in/images/gallery/villa-3.jpg",
+        "https://m4group.in/images/gallery/villa-4.jpg"
+      ],
+      "location_data": {
+        "lat": 18.7557,
+        "lng": 73.4091,
+        "address": "Tungarli, Lonavala, Maharashtra 410401"
+      }
     }
   ],
   "services": [

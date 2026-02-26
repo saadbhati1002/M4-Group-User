@@ -10,8 +10,6 @@ class AppConstants {
   static const String services = '/services';
   static const String serviceDetail = '/service-detail';
   static const String projects = '/projects';
-  static const String projectsOngoing = '/projects-ongoing';
-  static const String projectsCompleted = '/projects-completed';
   static const String projectDetail = '/project-detail';
   static const String gallery = '/gallery';
   static const String contact = '/contact';
