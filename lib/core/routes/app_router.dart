@@ -14,6 +14,10 @@ import '../../features/career/presentation/screens/career_screen.dart';
 import '../../data/models/project_model.dart';
 
 import '../../features/misc/presentation/screens/placeholder_screen.dart';
+import '../../features/custom_view/presentation/screens/custom_view_screen.dart';
+import '../../features/custom_view/presentation/screens/custom_detail_screen.dart';
+import '../../features/m4_family/presentation/screens/m4_family_screen.dart';
+import '../../data/models/customization_model.dart';
 
 import '../../data/models/project_filter.dart';
 
@@ -77,13 +81,20 @@ final GoRouter appRouter = GoRouter(
     ),
     GoRoute(
       path: AppConstants.customView,
-      builder: (context, state) =>
-          const LuxuryPlaceholderScreen(title: 'Custom View'),
+      builder: (context, state) => const CustomViewScreen(),
+      routes: [
+        GoRoute(
+          path: 'detail',
+          builder: (context, state) {
+            final category = state.extra as CustomizationCategory;
+            return CustomDetailScreen(category: category);
+          },
+        ),
+      ],
     ),
     GoRoute(
       path: AppConstants.m4Family,
-      builder: (context, state) =>
-          const LuxuryPlaceholderScreen(title: 'M4 Family'),
+      builder: (context, state) => const M4FamilyScreen(),
     ),
     GoRoute(
       path: AppConstants.ourBusiness,
